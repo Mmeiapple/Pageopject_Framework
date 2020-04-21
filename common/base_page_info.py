@@ -81,5 +81,9 @@ class BasePage(object):
     def quitframe(self):
         self.driver.switch_to.default_content()
         Log.logsinfo('切回默认框架')
+    #将滚动条滚到元素位置
+    def scrollbarelement(self,element_info):
+        element = self.find_element(element_info)
+        self.driver.execute_script('arguments[0].scrollIntoView();',element)
 
 
