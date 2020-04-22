@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from common.log_print import Log
 class BasePage(object):
     def __init__(self,driver):
-        driver=webdriver.Chrome()
+        # driver=webdriver.Chrome()
         self.driver=driver
 
     #浏览器的基本操作
