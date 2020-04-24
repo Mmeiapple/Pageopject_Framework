@@ -27,11 +27,27 @@ class OraganizationUserPage(BasePage):
                                   'locator_type': 'xpath',
                                   'locator_value': '//a[@href="/zentao/user-delete-20.html"]',
                                   'timeout': 1}
-        self.Maintenancedepartment_link = {'element_name': '维护部门链接',
+        self.maintenancedepartment_link = {'element_name': '维护部门链接',
                                            'locator_type': 'xpath',
                                            'locator_value': '//a[@href="/zentao/dept-browse.html"]',
                                            'timeout': 1}
-        self.Maintenancedepartment_link = {'element_name': '维护部门链接',
-                                           'locator_type': 'xpath',
-                                           'locator_value': '//a[@href="/zentao/dept-browse.html"]',
-                                           'timeout': 1}
+    def click_adduser(self):
+        self.click(self.adduser_button)
+
+    def click_addusers(self):
+        self.click(self.addusers_button)
+
+    def click_selection_button(self):
+        self.click(self.selection_button)
+
+    def click_edituser_button(self):
+        self.click(self.edituser_button)
+
+    def click_selection_button(self):
+        self.click(self.selection_button)
+
+    def click_deleteuser_button(self):
+        self.click(self.deleteuser_button)
+
+    def click_maintenancedepartment_link(self):
+        self.click(self.maintenancedepartment_link)
