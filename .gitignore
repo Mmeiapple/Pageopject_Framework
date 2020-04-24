@@ -1,0 +1,6 @@
+/log/
+/webdriver/
+/.idea/
+*.html
+*.log
+.DS_Store
