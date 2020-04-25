@@ -1,0 +1,26 @@
+
+login_page:
+          caotao_button:
+                        element_name: 版本选择按钮
+                        locator_type: xpath
+                        locator_value: //a[@id='zentao']
+                        timeout: 1
+
+          username_inputbox:
+            element_name: 用户名输入框
+            locator_type: xpath
+            locator_value: //input[@id='account']
+            timeout: 1
+
+          userpassword_inputbox:
+            element_name: 密码输入框
+            locator_type: xpath
+            locator_value: //input[@name='password']
+            timeout: 1
+
+          login_button:
+            element_name: 登录按钮
+            locator_type: xpath
+            locator_value: //button[@id='submit']
+            timeout: 1
+

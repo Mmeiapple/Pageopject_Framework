@@ -6,13 +6,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from common.log_print import Log
 class BasePage(object):
     def __init__(self,driver):
-        driver=webdriver.Chrome()
+        # driver=webdriver.Chrome()
         self.driver=driver
 
     #浏览器的基本操作
     def openurl(self,url):
         self.driver.get(url)
-        Log.logsinfo('打开浏览器地址%s'%url)
+        Log.logsinfo('打开浏览器地址%s--success'%url)
 
     def waittime(self):
         self.driver.implicitly_wait(60)
@@ -37,6 +37,10 @@ class BasePage(object):
     def gettitle(self):
         return self.driver.title()
 
+    def back(self):
+        self.driver.back()
+        Log.logsinfo('返回上一页--success')
+
     #定位元素
 
     def find_element(self,element_info):
@@ -55,7 +59,7 @@ class BasePage(object):
             locator_type=By.LINK_TEXT
         element=WebDriverWait(self.driver,locator_timeout).\
             until(lambda x:x.find_element(locator_type,locator_value_info))
-        Log.logsinfo('识别元素【%s】--success' % element_info['element_name'])
+        Log.logsinfo('识别元素【%s】' % element_info['element_name'])
         return element
 
 
@@ -63,12 +67,12 @@ class BasePage(object):
     def click(self,element_info):
         elment=self.find_element(element_info)
         elment.click()
-        Log.logsinfo('【%s】进行点击'%element_info['element_name'])
+        Log.logsinfo('【%s】进行点击--success'%element_info['element_name'])
 
     def input(self,element_info,content):
         elment=self.find_element(element_info)
         elment.send_keys(content)
-        Log.logsinfo('对【%s】输入内容【%s】'%(element_info['element_name'],content))
+        Log.logsinfo('对【%s】输入内容【%s】--success'%(element_info['element_name'],content))
 
 
     #页面布局操作方法
@@ -76,11 +80,12 @@ class BasePage(object):
     def switchframe(self,element_info):
         element=self.find_element(element_info)
         self.driver.switch_to.frame(element)
-        Log.logsinfo('切入框架--【%s】'%element_info['element_name'])
+        Log.logsinfo('切入框架--【%s】--success'%element_info['element_name'])
 
     def quitframe(self):
         self.driver.switch_to.default_content()
-        Log.logsinfo('切回默认框架')
+        Log.logsinfo('切回默认框架--success')
+
     #将滚动条滚到元素位置
     def scrollbarelement(self,element_info):
         element = self.find_element(element_info)
