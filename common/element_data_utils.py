@@ -26,6 +26,6 @@ class GetElementInfo:
 
 
 if __name__=='__main__':
-    dictread=GetElementInfo('login_page')
+    dictread=GetElementInfo('organization_company_page')
     a=dictread.getelementinfo()
     print(json.dumps(a,indent=1,ensure_ascii=False))

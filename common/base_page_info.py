@@ -4,6 +4,7 @@ from selenium  import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from common.log_print import Log
+from common.element_data_utils import GetElementInfo
 class BasePage(object):
     def __init__(self,driver):
         # driver=webdriver.Chrome()
@@ -65,8 +66,8 @@ class BasePage(object):
 
     #元素操作方法
     def click(self,element_info):
-        elment=self.find_element(element_info)
-        elment.click()
+        element=self.find_element(element_info)
+        element.click()
         Log.logsinfo('【%s】进行点击--success'%element_info['element_name'])
 
     def input(self,element_info,content):
@@ -74,8 +75,15 @@ class BasePage(object):
         elment.send_keys(content)
         Log.logsinfo('对【%s】输入内容【%s】--success'%(element_info['element_name'],content))
 
+    def submit(self,element_info):
+        element=self.find_element(element_info)
+        element.submit()
+        Log.logsinfo('【%s】表单提交--success' % element_info['element_name'])
 
     #页面布局操作方法
+    def clear(self,element_info):
+        element=self.find_element(element_info)
+        element.clear()
 
     def switchframe(self,element_info):
         element=self.find_element(element_info)

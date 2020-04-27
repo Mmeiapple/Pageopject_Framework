@@ -4,39 +4,32 @@ from common.base_page_info import BasePage
 from selenium import webdriver
 from elementinfo.organization_home_page import OraganizationHomePage
 from Process_test.login_test import login
+from common.element_data_utils import GetElementInfo
 
 class OraganizationUserPage(BasePage):
     def __init__(self,driver):
         super(OraganizationUserPage,self).__init__(driver)
-        # 用户页面元素
-        self.adduser_button = {'element_name': '添加用户按钮',
-                               'locator_type': 'xpath',
-                               'locator_value': '//div/div[3]/a[2]/i[@class="icon icon-plus"]',
-                               'timeout': 1}
-        self.addusers_button = {'element_name': '批量添加用户按钮',
-                                'locator_type': 'xpath',
-                                'locator_value': '//a[@class="btn btn-secondary"]',
-                                'timeout': 1}
-        self.selection_button = {'element_name': '全选按钮',
-                                 'locator_type': 'xpath',
-                                 'locator_value': '//div[@title="全选"]',
-                                 'timeout': 1}
-        self.edituser_button = {'element_name': '编辑用户按钮',
-                                'locator_type': 'xpath',
-                                'locator_value': '//form/table/tbody/tr[2]/td[11]/a[1]/i[@class="icon-common-edit icon-edit"]',
-                                'timeout': 1}
-        self.deleteuser_button = {'element_name': '删除用户按钮',
-                                  'locator_type': 'xpath',
-                                  'locator_value': '//table/tbody/tr[3]/td[11]/a[2]/i[@class="icon-trash"]',
-                                  'timeout': 1}
-        self.dismissdeleteuser_button = {'element_name': '取消删除按钮',
-                                  'locator_type': 'xpath',
-                                  'locator_value': '//div/div/div/button[@class="close"]',
-                                  'timeout': 1}
-        self.maintenancedepartment_link = {'element_name': '维护部门链接',
-                                           'locator_type': 'xpath',
-                                           'locator_value': '//a[@class="btn btn-info btn-wide"][text()="维护部门"]',
-                                           'timeout': 1}
+        # ---用户页面元素---
+
+        # 添加用户按钮
+        element_info=GetElementInfo('organization_user_page').getelementinfo()
+        self.adduser_button = element_info['adduser_button']
+        # 批量添加用户按钮
+        self.addusers_button = element_info['addusers_button']
+        # 全选按钮
+        self.selection_button = element_info['selection_button']
+        # 编辑用户按钮
+        self.edituser_button = element_info['edituser_button']
+        # 删除用户按钮
+        self.deleteuser_button = element_info['deleteuser_button']
+        # 取消删除按钮
+        self.dismissdeleteuser_button = element_info['dismissdeleteuser_button']
+        # 维护部门链接
+        self.maintenancedepartment_link = element_info['maintenancedepartment_link']
+
+
+
+
     def click_adduser(self):
         self.click(self.adduser_button)
 
