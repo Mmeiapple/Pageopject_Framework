@@ -41,11 +41,17 @@ if __name__=="__main__":
         dri=webdriver.Chrome(executable_path=webpath)
         login=login_test.login(dri)
         driver=OraganizationHomePage(dri)
+        #点击组织连接
         driver.click_organization_link()
+        #点击部门连接
         driver.click_department_link()
+        #点击公司连接
         driver.click_company_link()
+        #点击动态连接
         driver.click_dynamic_link()
+        #点击动态连接
         driver.click_department_link()
+        #点击用户连接
         driver.click_user_link()
     finally:
         driver.quitbrowsr()

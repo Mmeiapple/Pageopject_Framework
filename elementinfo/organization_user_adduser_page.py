@@ -11,7 +11,7 @@ class OraganizationUserAdduserPage(BasePage):
     def __init__(self,driver):
         super(OraganizationUserAdduserPage,self).__init__(driver)
 
-# 添加用户页面
+#       添加用户页面
         elememnt=GetElementInfo('organization_user_adduser_page').getelementinfo()
 
 #       用户名输入框
@@ -126,6 +126,7 @@ if __name__=="__main__":
     driver.input_passwordchecking_input('a12345678')
     driver.scroll_scrollbarelement()
     driver.click_save_button()
+
 
 
 
