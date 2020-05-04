@@ -1,13 +1,15 @@
 import os
 from elementinfo.login_page import LoginPage
-from selenium import webdriver
-from common.element_data_utils import GetElementInfo
 from common.set_driver import SetDriver
+from common.get_config import getconfig
+from common.browser import Browser
 
 current = os.path.dirname(__file__)
 webpath = os.path.join(current, '../webdriver/chromedriver.exe')
 
-def login(driver,url='http://106.53.50.202:8999/zentao3/www/my/',username='admin',password='a12345678'):
+
+#登录方法
+def login(driver,url=getconfig.geturl,username='admin',password='a12345678'):
     driver=LoginPage(driver)
     driver.openurl(url)
     driver.inputusername(username)
@@ -16,5 +18,5 @@ def login(driver,url='http://106.53.50.202:8999/zentao3/www/my/',username='admin
     return driver
 
 if __name__=="__main__":
-    dri=SetDriver()
+    dri=Browser().browser()
     a=login(dri)

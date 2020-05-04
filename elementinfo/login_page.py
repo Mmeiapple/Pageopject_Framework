@@ -8,33 +8,13 @@ from common.element_data_yaml import GetElementInfoYaml
 class LoginPage(BasePage):
     def __init__(self,driver):
         super(LoginPage,self).__init__(driver)
-        # self.caotao_button={'element_name':'版本选择按钮',
-        #                          'locator_type':'xpath',
-        #                          'locator_value':'//a[@id="zentao"]',
-        #                          'timeout':1}
-        # self.username_inputbox={'element_name':'用户名输入框',
-        #                          'locator_type':'xpath',
-        #                          'locator_value':'//input[@id="account"]',
-        #                          'timeout':1}
-        # self.userpassword_inputbox={'element_name':'密码输入框',
-        #                             'locator_type':'xpath',
-        #                             'locator_value':'//input[@name="password"]',
-        #                             'timeout':1}
-        # self.login_button={ 'element_name':'登录按钮',
-        #                     'locator_type':'xpath',
-        #                     'locator_value':'//button[@id="submit"]',
-        #                     'timeout':1}
-        # element=GetElementInfo('login_page').getelementinfo()
-        # self.caotao_button=element['caotao_button']
-        # self.username_inputbox=element['username_inputbox']
-        # self.userpassword_inputbox=element['userpassword_inputbox']
-        # self.login_button =element['login_button']
         element=GetElementInfoYaml().getelementinfo()
+        #获取元素定位信息
         self.caotao_button=element['login_page']['caotao_button']
         self.username_inputbox=element['login_page']['username_inputbox']
         self.userpassword_inputbox=element['login_page']['userpassword_inputbox']
         self.login_button =element['login_page']['login_button']
-
+    #调用父类方法
     def clickzaotao(self):
         self.click(self.caotao_button)
 

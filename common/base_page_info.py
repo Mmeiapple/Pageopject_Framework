@@ -1,13 +1,12 @@
 import os
 import time
 from selenium  import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from common.log_print import Log
-from common.element_data_utils import GetElementInfo
 class BasePage(object):
     def __init__(self,driver):
-        # driver=webdriver.Chrome()
         self.driver=driver
 
     #浏览器的基本操作
@@ -100,3 +99,36 @@ class BasePage(object):
         self.driver.execute_script('arguments[0].scrollIntoView();',element)
 
 
+    #selenium 执行脚本
+
+    def deleteelementattribute(self,element_info,attribute_name):
+        element=self.find_element(element_info)
+        self.driver.execute_script('arguments[0].removeAttribute("%s");'%attribute_name,element)
+
+    def updateelementattribute(self,element_info,attribute_name,value):
+        element=self.find_element(element_info)
+        self.driver.execute_script('arguments[0].setAttribute("%s","%s");'%(attribute_name,value),element)
+
+    #Alert 操作
+
+    def accept(self):
+        self.driver.switch_to.alert.accept()
+
+    def dismiss(self):
+        self.driver.switch_to.alert.dismiss()
+
+    def dismiss(self,contect):
+        self.driver.switch_to.alert.send_keys(contect)
+
+    #鼠标操作
+
+    def rightclick(self,element_info):
+        element=self.find_element(element_info)
+        ActionChains(self.driver).context_click(element).perform()
+
+    def releasemouse(self):
+        ActionChains(self.driver).release().perform()
+
+    def releasehover(self,element_info):
+        element=self.find_element(element_info)
+        ActionChains(self.driver).move_to_element(element).perform()
