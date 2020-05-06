@@ -14,13 +14,38 @@ class GetConfig():
     #自定义传值获取配置信息
     def getindependent(self,configuration,name):
         return self.__conf.get(configuration,name)
-
+    """
+    
+    默认测试地址
+    
+    """
     @property  #将方法变为属性
     def geturl(self):
         return self.__conf.get('defaule','url')
+    """
+
+    默认等待时间
+
+    """
+    @property
+    def gettimeout(self):
+        return self.__conf.get('defaule','time_out')
+
+    """
+
+    默认截图地址
+
+    """
+
+    @property  #将方法变为属性
+    def getscreenpath(self):
+        return self.__conf.get('defaule','screenshot_path')
+
+
+
 
 getconfig=GetConfig()
 
 
 if __name__=="__main__":
-    print(getconfig.getindependent('defaule','url'))
+    print(getconfig.getscreenpath)

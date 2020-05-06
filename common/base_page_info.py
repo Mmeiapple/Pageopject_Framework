@@ -1,12 +1,15 @@
 import os
 import time
 from selenium  import webdriver
+from common.get_config import getconfig
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from common.log_print import Log
 class BasePage(object):
     def __init__(self,driver):
+        # driver=webdriver.Chrome()
         self.driver=driver
 
     #浏览器的基本操作
@@ -14,8 +17,8 @@ class BasePage(object):
         self.driver.get(url)
         Log.logsinfo('打开浏览器地址%s--success'%url)
 
-    def waittime(self):
-        self.driver.implicitly_wait(60)
+    def waittime(self,time=getconfig.gettimeout):
+        self.driver.implicitly_wait(time)
 
     def setmaxbrowser(self):
         self.driver.maximize_window()
@@ -79,11 +82,15 @@ class BasePage(object):
         element.submit()
         Log.logsinfo('【%s】表单提交--success' % element_info['element_name'])
 
-    #页面布局操作方法
+
     def clear(self,element_info):
         element=self.find_element(element_info)
         element.clear()
 
+    """
+    frame框架操作
+    
+    """
     def switchframe(self,element_info):
         element=self.find_element(element_info)
         self.driver.switch_to.frame(element)
@@ -93,13 +100,44 @@ class BasePage(object):
         self.driver.switch_to.default_content()
         Log.logsinfo('切回默认框架--success')
 
+
+    """
+    
+    句柄操作
+    
+    """
+
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def switch_window_by_handle(self,windowhandle):
+        self.driver.switch_to.window(windowhandle)
+
+    def switch_window_by_tiele(self,title):
+        window_handles=self.driver.window_handles
+        for window_handle in window_handles:
+            if WebDriverWait(self.driver,getconfig.gettimeout).until(EC.title_contains(title)):
+                self.driver.switch_to.window(window_handle)
+                break
+
+    def switch_window_by_tiele(self,url):
+        window_handles=self.driver.window_handles
+        for window_handle in window_handles:
+            if WebDriverWait(self.driver,getconfig.gettimeout).until(EC.title_contains(url)):
+                self.driver.switch_to.window(window_handle)
+                break
+
     #将滚动条滚到元素位置
     def scrollbarelement(self,element_info):
         element = self.find_element(element_info)
         self.driver.execute_script('arguments[0].scrollIntoView();',element)
 
 
-    #selenium 执行脚本
+
+    """
+    selenium 执行JS脚本
+    
+    """
 
     def deleteelementattribute(self,element_info,attribute_name):
         element=self.find_element(element_info)
@@ -109,18 +147,30 @@ class BasePage(object):
         element=self.find_element(element_info)
         self.driver.execute_script('arguments[0].setAttribute("%s","%s");'%(attribute_name,value),element)
 
-    #Alert 操作
 
-    def accept(self):
-        self.driver.switch_to.alert.accept()
+    """
+    
+    Alert 操作
+    
+    """
 
-    def dismiss(self):
-        self.driver.switch_to.alert.dismiss()
+    def accept(self,action='accept',time_out=getconfig.gettimeout):
+        WebDriverWait(self.driver,time_out).until(EC.alert_is_present())
+        alert=self.driver.switch_to.alert
+        alert_text=alert.text()
+        if action=='accept':
+            alert.accept()
+        elif action == 'dismiss':
+            alert.dismiss()
+        return alert_text
 
-    def dismiss(self,contect):
+    def alert_sends(self,contect):
         self.driver.switch_to.alert.send_keys(contect)
 
-    #鼠标操作
+    """
+    鼠标操作
+    
+    """
 
     def rightclick(self,element_info):
         element=self.find_element(element_info)
@@ -132,3 +182,21 @@ class BasePage(object):
     def releasehover(self,element_info):
         element=self.find_element(element_info)
         ActionChains(self.driver).move_to_element(element).perform()
+
+    """
+    截图操作
+    
+    """
+
+    def screen(self,*screen_path):
+        curren=os.path.dirname(__file__)
+        now = time.strftime('%Y_%m_%d_%H_%M_%S')
+        if len(screen_path)==0:
+            path=getconfig.getscreenpath
+        else:
+            path=screen_path[0]
+        filepath=os.path.join(curren,path,'UItest%s.png'%now)
+        self.driver.get_screenshot_as_file(filepath)
+
+
+

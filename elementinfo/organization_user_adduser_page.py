@@ -12,7 +12,7 @@ class OraganizationUserAdduserPage(BasePage):
         super(OraganizationUserAdduserPage,self).__init__(driver)
 
 #       添加用户页面
-        elememnt=GetElementInfo('organization_user_adduser_page').getelementinfo()
+        elememnt=GetElementInfo('organization').getelementinfo('user_adduser_page')
 
 #       用户名输入框
         self.username_input=elememnt['username_input']

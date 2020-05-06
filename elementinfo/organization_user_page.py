@@ -12,7 +12,7 @@ class OraganizationUserPage(BasePage):
         # ---用户页面元素---
 
         # 添加用户按钮
-        element_info=GetElementInfo('organization_user_page').getelementinfo()
+        element_info=GetElementInfo('organization').getelementinfo('user_page')
         self.adduser_button = element_info['adduser_button']
         # 批量添加用户按钮
         self.addusers_button = element_info['addusers_button']

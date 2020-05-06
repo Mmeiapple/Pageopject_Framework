@@ -9,7 +9,7 @@ class OraganizationHomePage(BasePage):
         super(OraganizationHomePage,self).__init__(driver)
 
         #二级目录链接
-        element=GetElementInfo('organization_home_page').getelementinfo()
+        element=GetElementInfo('organization').getelementinfo('home_page')
         self.organization_link=element['organization_link']
         self.user_link=element['user_link']
         self.department_link=element['department_link']
