@@ -7,8 +7,6 @@ from common.browser import Browser
 current = os.path.dirname(__file__)
 webpath = os.path.join(current, '../webdriver/chromedriver.exe')
 
-
-#登录方法
 def login(driver,url=getconfig.geturl,username='admin',password='a12345678'):
     driver=LoginPage(driver)
     driver.openurl(url)
@@ -18,5 +16,5 @@ def login(driver,url=getconfig.geturl,username='admin',password='a12345678'):
     return driver
 
 if __name__=="__main__":
-    dri=Browser().browser()
+    dri=Browser('chrome').getdriver()
     a=login(dri)

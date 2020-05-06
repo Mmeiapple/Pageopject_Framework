@@ -43,4 +43,4 @@ class Browser(object):
         return driver
 
 if __name__=="__main__":
-    Browser('firefox').getdriver()
+    Browser('chrome').getdriver()

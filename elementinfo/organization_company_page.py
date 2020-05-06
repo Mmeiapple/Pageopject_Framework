@@ -9,7 +9,7 @@ class OrganizationCompanyPage(BasePage):
     def __init__(self,driver):
         super(OrganizationCompanyPage,self).__init__(driver)
 
-        element_info=GetElementInfo('organization_company_page').getelementinfo()
+        element_info=GetElementInfo('organization').getelementinfo('company_page')
 
         self.editcompany_click=element_info['editcompany_click']
 

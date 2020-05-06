@@ -12,20 +12,25 @@ class GetElementInfo:
     def __init__(self,sheetname,filepath=datapath):
         self.work=xlrd.open_workbook(filepath)
         self.sheet=self.work.sheet_by_name(sheetname)
-    def getelementinfo(self):
-        maindict={}
+
+
+    def getelementinfo(self,pagename):
+        pagedict={}
         for i in range(1,self.sheet.nrows):
-            seconddict={}
-            for j in range(1,self.sheet.ncols):
-                title=self.sheet.cell_value(0,j)
-                value=self.sheet.cell_value(i,j)
-                seconddict.update({title:value})
-            headtitle=self.sheet.cell_value(i,0)
-            maindict.update({headtitle:seconddict})
-        return maindict
-
-
+            if self.sheet.cell_value(i,0)==pagename:
+                print(self.sheet.cell_value(i,0))
+                seconddict={}
+                for j in range(2,self.sheet.ncols):
+                    title=self.sheet.cell_value(0,j)
+                    value=self.sheet.cell_value(i,j)
+                    seconddict.update({title:value})
+                    headtitle = self.sheet.cell_value(i, 1)
+                    pagedict.update({headtitle: seconddict})
+        return pagedict
 if __name__=='__main__':
-    dictread=GetElementInfo('organization_company_page')
-    a=dictread.getelementinfo()
-    print(json.dumps(a,indent=1,ensure_ascii=False))
+    dictread=GetElementInfo('login').getelementinfo('login_page')
+    print(dictread['caotao_button'])
+    print(json.dumps(dictread,indent=1,ensure_ascii=False))
+
+
+

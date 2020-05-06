@@ -8,12 +8,12 @@ from common.element_data_yaml import GetElementInfoYaml
 class LoginPage(BasePage):
     def __init__(self,driver):
         super(LoginPage,self).__init__(driver)
-        element=GetElementInfoYaml().getelementinfo()
+        element=GetElementInfo('login').getelementinfo('login_page')
         #获取元素定位信息
-        self.caotao_button=element['login_page']['caotao_button']
-        self.username_inputbox=element['login_page']['username_inputbox']
-        self.userpassword_inputbox=element['login_page']['userpassword_inputbox']
-        self.login_button =element['login_page']['login_button']
+        self.caotao_button=element['caotao_button']
+        self.username_inputbox=element['username_inputbox']
+        self.userpassword_inputbox=element['userpassword_inputbox']
+        self.login_button =element['login_button']
     #调用父类方法
     def clickzaotao(self):
         self.click(self.caotao_button)
