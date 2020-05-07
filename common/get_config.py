@@ -29,7 +29,7 @@ class GetConfig():
     """
     @property
     def gettimeout(self):
-        return self.__conf.get('defaule','time_out')
+        return float(self.__conf.get('defaule','time_out'))
 
     """
 
@@ -43,9 +43,36 @@ class GetConfig():
 
 
 
+    """
+
+    默认用户名称
+
+    """
+
+    @property  #将方法变为属性
+    def getusername(self):
+        return self.__conf.get('defaule','username')
+
+
+
+
+    """
+
+    默认用户密码
+
+    """
+
+    @property  #将方法变为属性
+    def getpassword(self):
+        return self.__conf.get('defaule','password')
+
+
+
 
 getconfig=GetConfig()
 
 
 if __name__=="__main__":
-    print(getconfig.getscreenpath)
+    print(type(getconfig.gettimeout))
+    print(type(getconfig.getusername))
+    print(type(getconfig.getpassword))

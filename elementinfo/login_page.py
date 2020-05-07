@@ -5,6 +5,7 @@ from common.base_page_info import BasePage
 from common.log_print import Log
 from common.element_data_utils import GetElementInfo
 from common.element_data_yaml import GetElementInfoYaml
+from common.browser import Browser
 class LoginPage(BasePage):
     def __init__(self,driver):
         super(LoginPage,self).__init__(driver)
@@ -27,12 +28,13 @@ class LoginPage(BasePage):
     def clicklogin(self):
         self.click(self.login_button)
 
+    def switch_accept(self):
+        self.accept()
+
 
 if __name__=="__main__":
     try:
-        current=os.path.dirname(__file__)
-        webpath=os.path.join(current,'../webdriver/chromedriver.exe')
-        dri=webdriver.Chrome(executable_path=webpath)
+        dri=Browser('chrome').getdriver()
         driver=LoginPage(dri)
         driver.openurl('http://106.53.50.202:8999/zentao3/www/user-login-L3plbnRhbzYvd3d3Lw==.html')
         driver.waittime()
@@ -40,5 +42,6 @@ if __name__=="__main__":
         driver.inputusername('admin')
         driver.inputuserpassword('a12345678')
         driver.clicklogin()
+        driver.waittime(2)
     finally:
         driver.quitbrowsr()

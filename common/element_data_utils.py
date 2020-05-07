@@ -18,7 +18,6 @@ class GetElementInfo:
         pagedict={}
         for i in range(1,self.sheet.nrows):
             if self.sheet.cell_value(i,0)==pagename:
-                print(self.sheet.cell_value(i,0))
                 seconddict={}
                 for j in range(2,self.sheet.ncols):
                     title=self.sheet.cell_value(0,j)
@@ -28,8 +27,8 @@ class GetElementInfo:
                     pagedict.update({headtitle: seconddict})
         return pagedict
 if __name__=='__main__':
-    dictread=GetElementInfo('login').getelementinfo('login_page')
-    print(dictread['caotao_button'])
+    dictread=GetElementInfo('main').getelementinfo('main_page')
+    # print(dictread['caotao_button'])
     print(json.dumps(dictread,indent=1,ensure_ascii=False))
 
 

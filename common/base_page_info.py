@@ -20,6 +20,10 @@ class BasePage(object):
     def waittime(self,time=getconfig.gettimeout):
         self.driver.implicitly_wait(time)
 
+
+    def timesleep(self,second=3):
+        time.sleep(second)
+
     def setmaxbrowser(self):
         self.driver.maximize_window()
 
@@ -86,6 +90,18 @@ class BasePage(object):
     def clear(self,element_info):
         element=self.find_element(element_info)
         element.clear()
+
+
+
+    """
+    获取文本信息
+    
+    """
+
+    def get_text(self,element_info):
+        element=self.find_element(element_info)
+        return element.text
+
 
     """
     frame框架操作
@@ -157,8 +173,8 @@ class BasePage(object):
     def accept(self,action='accept',time_out=getconfig.gettimeout):
         WebDriverWait(self.driver,time_out).until(EC.alert_is_present())
         alert=self.driver.switch_to.alert
-        alert_text=alert.text()
-        if action=='accept':
+        alert_text=alert.text
+        if action =='accept':
             alert.accept()
         elif action == 'dismiss':
             alert.dismiss()
@@ -187,16 +203,24 @@ class BasePage(object):
     截图操作
     
     """
-
-    def screen(self,*screen_path):
-        curren=os.path.dirname(__file__)
-        now = time.strftime('%Y_%m_%d_%H_%M_%S')
-        if len(screen_path)==0:
-            path=getconfig.getscreenpath
+    #
+    # def screen(self,*screen_path):
+    #     curren=os.path.dirname(__file__)
+    #     now = time.strftime('%Y_%m_%d_%H_%M_%S')
+    #     if len(screen_path)== 0:
+    #         path=getconfig.getscreenpath
+    #     else:
+    #         path=screen_path[0]
+    #     path=os.path.join(curren,path,'UItest%s.png'%now)
+    #     self.driver.get_screenshot_as_file(path)
+    def screenshot_as_file(self, *screenshot_path):
+        current_dir = os.path.dirname(__file__)
+        if len(screenshot_path) == 0:
+            screenshot_filepath = getconfig.getscreenpath
         else:
-            path=screen_path[0]
-        filepath=os.path.join(curren,path,'UItest%s.png'%now)
-        self.driver.get_screenshot_as_file(filepath)
-
+            screenshot_filepath = screenshot_path[0]
+        now = time.strftime('%Y_%m_%d_%H_%M_%S')
+        screenshot_filepath = os.path.join(current_dir,screenshot_filepath, 'UITest_%s.png' % now)
+        self.driver.get_screenshot_as_file(screenshot_filepath)
 
 

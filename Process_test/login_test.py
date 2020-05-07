@@ -13,9 +13,9 @@ def login(driver,url=getconfig.geturl,username='admin',password='a12345678'):
     driver.inputusername(username)
     driver.inputuserpassword(password)
     driver.clicklogin()
-    driver.screen(())
     return driver
 
 if __name__=="__main__":
     dri=Browser('chrome').getdriver()
     a=login(dri)
+    a.screenshot_as_file()
