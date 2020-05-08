@@ -4,7 +4,6 @@ from configparser import ConfigParser
 
 current=os.path.dirname(__file__)
 filepath=os.path.join(current,'../config/conf.ini')
-print(filepath)
 
 class GetConfig():
     def __init__(self):
