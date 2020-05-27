@@ -8,10 +8,10 @@ from common.browser import Browser
 
 class SeleniumBaseCase(unittest.TestCase):
 
-    """
+    '''
     封装一个setUp类方法
 
-    """
+    '''
     @classmethod
     def setUpClass(cls) -> None:
         Log.logsinfo("=======测试类开始=======")
@@ -21,6 +21,7 @@ class SeleniumBaseCase(unittest.TestCase):
     封装一个初始化测试工作方法
     
     """
+
     def setUp(self) -> None:
         self.basepage=BasePage(Browser('chrome').getdriver())
         self.basepage.waittime(10)

@@ -2,17 +2,19 @@ import unittest
 from action.login_action import LoginAction
 from common.selenium_base_case import SeleniumBaseCase
 from common.log_print import Log
+from common.test_data_utils import TestDataUtils
 
 
 class Logintest(SeleniumBaseCase):
 
     def setUp(self) -> None:
+
         """
         继承父类的setUp方法
 
         """
-
         super().setUp()
+        self.test_class_data=TestDataUtils('login_suite','LoginTest').convert_exceldata_to_testdata()
 
         """
         也可以在setUp方法中自定义功能,前提要写继承父类的方法 super().setUp()
@@ -21,11 +23,12 @@ class Logintest(SeleniumBaseCase):
         Log.logsinfo('登录测试用例开始')
 
     def test_success_login(self):
-        '''登录成功测试用例'''
+        test_function_data=self.test_class_data['test_login_success']
+        self._testMethodDoc=test_function_data['test_name']
         login_action=LoginAction(self.basepage.driver)
-        main_page=login_action.suceseelogin('admin','a12345678')
+        main_page=login_action.suceseelogin(test_function_data['test_parameter'].get('username'),test_function_data['test_parameter'].get('password'))
         actual_result=main_page.get_username()
-        self.assertEqual(actual_result,'admin','登录成功用例执行失败')
+        self.assertEqual(actual_result,test_function_data['excepted_result'],'登录成功用例执行失败')
 
     def tearDown(self) -> None:
 
@@ -39,4 +42,4 @@ class Logintest(SeleniumBaseCase):
 
 
 if __name__=="__main__":
-    unittest.main(verbosity=1)
+    unittest.main(verbosity=2)
