@@ -8,10 +8,10 @@ from common.browser import Browser
 
 class SeleniumBaseCase(unittest.TestCase):
 
-    """
+    '''
     封装一个setUp类方法
 
-    """
+    '''
     @classmethod
     def setUpClass(cls) -> None:
         Log.logsinfo("=======测试类开始=======")
@@ -21,6 +21,7 @@ class SeleniumBaseCase(unittest.TestCase):
     封装一个初始化测试工作方法
     
     """
+
     def setUp(self) -> None:
         self.basepage=BasePage(Browser('chrome').getdriver())
         self.basepage.waittime(10)
@@ -33,8 +34,15 @@ class SeleniumBaseCase(unittest.TestCase):
     """
 
     def tearDown(self) -> None:
-        self.basepage.timesleep(4)
+        # 测试用例失败截图
+        errors = self._outcome.errors
+        for test, exc_info in errors:
+            if exc_info:
+                self.basepage.timesleep()
+                self.basepage.screenshot_as_file()
+        self.basepage.timesleep(3)
         self.basepage.closebrowser()
+        Log.logsinfo('---------测试方法执行完毕-----------')
 
     """
     封装一个tearDown类方法
@@ -42,8 +50,9 @@ class SeleniumBaseCase(unittest.TestCase):
     """
     @classmethod
     def tearDownClass(cls) -> None:
-        Log.logsinfo("=======测试类结束=======")
 
+
+        Log.logsinfo("=======测试类结束=======")
 
 if __name__=="__main__":
     unittest.main(verbosity=2)

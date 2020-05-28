@@ -1,5 +1,6 @@
 import os
 import time
+from common import HTMLTestReportCN
 from selenium  import webdriver
 from common.get_config import getconfig
 from selenium.webdriver.common.action_chains import ActionChains
@@ -203,17 +204,14 @@ class BasePage(object):
     截图操作
     
     """
-    #
-    # def screen(self,*screen_path):
-    #     curren=os.path.dirname(__file__)
-    #     now = time.strftime('%Y_%m_%d_%H_%M_%S')
-    #     if len(screen_path)== 0:
-    #         path=getconfig.getscreenpath
-    #     else:
-    #         path=screen_path[0]
-    #     path=os.path.join(curren,path,'UItest%s.png'%now)
-    #     self.driver.get_screenshot_as_file(path)
-    def screenshot_as_file(self, *screenshot_path):
+
+    def screenshot_as_file(self):
+        current=os.path.dirname(__file__)
+        report_path = os.path.join(current,getconfig.get_reportpath)
+        report_dir = HTMLTestReportCN.ReportDirectory(report_path)
+        report_dir.get_screenshot(self.driver)
+
+    def screenshot_as_file_old(self, *screenshot_path):
         current_dir = os.path.dirname(__file__)
         if len(screenshot_path) == 0:
             screenshot_filepath = getconfig.getscreenpath

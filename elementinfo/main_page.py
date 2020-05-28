@@ -5,7 +5,7 @@ from Process_test import login_test
 
 class MainPage(BasePage):
     def __init__(self,driver):
-        super().__init__(driver)
+        super(MainPage,self).__init__(driver)
         element=GetElementInfo('main').getelementinfo('main_page')
         self.myzone_link=element['myzone_link']
         self.user_menu=element['user_menu']
