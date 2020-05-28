@@ -54,7 +54,6 @@ class GetConfig():
 
 
 
-
     """
 
     默认用户密码
@@ -64,6 +63,27 @@ class GetConfig():
     @property  #将方法变为属性
     def getpassword(self):
         return self.__conf.get('defaule','password')
+
+    """
+
+    测试报告路径
+
+    """
+
+    @property  #将方法变为属性
+    def get_reportpath(self):
+        return self.__conf.get('defaule','report_path')
+
+
+    """
+
+    测试用例路径
+
+    """
+
+    @property  #将方法变为属性
+    def get_casepath(self):
+        return self.__conf.get('defaule','case_path')
 
 
 
@@ -75,3 +95,6 @@ if __name__=="__main__":
     print(type(getconfig.gettimeout))
     print(type(getconfig.getusername))
     print(type(getconfig.getpassword))
+    print(getconfig.get_reportpath)
+    print(getconfig.get_casepath)
+

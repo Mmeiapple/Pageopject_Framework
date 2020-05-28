@@ -1,6 +1,5 @@
 import os
 import xlrd
-<<<<<<< HEAD
 import json
 
 
@@ -59,7 +58,7 @@ if __name__=="__main__":
     excel_path=os.path.join(curren,'../data/test_data.xlsx')
     sheet_info=ExcelUtils(excel_path,'login_suite').get_sheet_data_by_list()
     print(json.dumps(sheet_info,indent=1,ensure_ascii=False))
-=======
+
 
 
 class ExcelUtils(object):
@@ -105,4 +104,4 @@ if __name__ == '__main__':
     test_data_path = os.path.join(current_path,'../data/element_info.xlsx')
     sheet_infos = ExcelUtils(test_data_path,'login').get_sheet_data_by_list()
     print( sheet_infos )
->>>>>>> origin/master
+
