@@ -208,7 +208,7 @@ class BasePage(object):
     def screenshot_as_file(self):
         current=os.path.dirname(__file__)
         report_path = os.path.join(current,getconfig.get_reportpath)
-        report_dir = HTMLTestReportCN.ReportDirectory(report_path)
+        report_dir =HTMLTestReportCN.ReportDirectory(report_path)
         report_dir.get_screenshot(self.driver)
 
     def screenshot_as_file_old(self, *screenshot_path):
