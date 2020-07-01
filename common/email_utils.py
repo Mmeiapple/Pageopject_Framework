@@ -45,12 +45,22 @@ class EmilUtils():
             return msg
 
     def send_mial(self):
-        smtp = smtplib.SMTP()
-        smtp.connect(self.smtp_server)
-        smtp.login(user=self.smtp_sender, password=self.smtp_senderpassword)
+        try:
+            smtp = smtplib.SMTP()
+            smtp.connect(self.smtp_server)
+            smtp.login(user=self.smtp_sender, password=self.smtp_senderpassword)
+        except:
+            smtp=smtplib.SMTP_SSL()
+            smtp.login(user=self.smtp_sender, password=self.smtp_senderpassword)
+
         mail_content=self.mail_content()
-        smtp.sendmail(self.smtp_sender, self.smtp_receiver.split(',') + self.smtp_cc.split(','),
-                      mail_content.as_string())
+        try:
+            smtp.sendmail(self.smtp_sender, self.smtp_receiver.split(',') + self.smtp_cc.split(','),
+                          mail_content.as_string())
+        except Exception as e:
+            print("发送失败，未知错误")
+        smtp.quit()
+
 
 if __name__=="__main__":
     current_path = os.path.dirname(__file__)

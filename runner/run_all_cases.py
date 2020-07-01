@@ -2,6 +2,8 @@ import os
 import unittest
 from common import HTMLTestReportCN
 from common.get_config import getconfig
+from common.email_utils import EmilUtils
+import DEMO
 
 
 current=os.path.dirname(__file__)
@@ -37,4 +39,7 @@ class  RunAllCases:
 
 
 if __name__=="__main__":
-    a=RunAllCases().run()
+    dir_path=RunAllCases().run()
+    report_path_zip=dir_path+'/../禅道自动化测试报告.zip'
+    DEMO.zip_dir(dir_path,report_path_zip)
+    EmilUtils('自动化测试报告（测试版本）','来自Python邮件测试',report_path_zip).send_mial()
