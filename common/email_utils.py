@@ -48,6 +48,7 @@ class EmilUtils():
         smtp = smtplib.SMTP()
         smtp.connect(self.smtp_server)
         smtp.login(user=self.smtp_sender, password=self.smtp_senderpassword)
+        mail_content=self.mail_content()
         smtp.sendmail(self.smtp_sender, self.smtp_receiver.split(',') + self.smtp_cc.split(','),
                       mail_content.as_string())
 
