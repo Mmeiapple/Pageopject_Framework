@@ -20,29 +20,34 @@ class EmilUtils():
 
     def mail_content(self):
         if self.smtp_file!=None:
-            msg = MIMEMultipart()
-            with open(self.smtp_file, 'rb') as f:
-                mime = MIMEBase('zip', 'zip', filename=self.smtp_file.split('/')[-1])
-                mime.add_header('Content-Disposition', 'attachment', filename=('gb2312', '', self.smtp_file.split('/')[-1]))
-                mime.add_header('Content-ID', '<0>')
-                mime.add_header('X-Attachment-Id', '0')
-                mime.set_payload(f.read())
-                encoders.encode_base64(mime)
-                msg.attach(mime)
-            # 邮件正文信息对象
-            msg.attach(MIMEText(self.smtp_body, 'html', 'utf-8'))
-            msg['from'] = self.smtp_sender
-            msg['to'] = self.smtp_receiver
-            msg['Cc'] = self.smtp_cc
-            msg['subject'] = self.smtp_subject
-            return msg
+            if self.smtp_file.split('.')[-1].__eq__('zip'):
+
+                return self.mail_zip_content
         else:
-            msg=MIMEText(self.smtp_body, 'html', 'utf-8')
-            msg['from'] = self.smtp_sender
-            msg['to'] = self.smtp_receiver
-            msg['Cc'] = self.smtp_cc
-            msg['subject'] = self.smtp_subject
-            return msg
+            return self.mail_text_content
+    def mail_text_content(self):
+        msg = MIMEText(self.smtp_body, 'html', 'utf-8')
+        msg['from'] = self.smtp_sender
+        msg['to'] = self.smtp_receiver
+        msg['Cc'] = self.smtp_cc
+        msg['subject'] = self.smtp_subject
+    def mail_zip_content(self):
+        msg = MIMEMultipart()
+        with open(self.smtp_file, 'rb') as f:
+            mime = MIMEBase('zip', 'zip', filename=self.smtp_file.split('/')[-1])
+            mime.add_header('Content-Disposition', 'attachment', filename=('gb2312', '', self.smtp_file.split('/')[-1]))
+            mime.add_header('Content-ID', '<0>')
+            mime.add_header('X-Attachment-Id', '0')
+            mime.set_payload(f.read())
+            encoders.encode_base64(mime)
+            msg.attach(mime)
+        # 邮件正文信息对象
+        msg.attach(MIMEText(self.smtp_body, 'html', 'utf-8'))
+        msg['from'] = self.smtp_sender
+        msg['to'] = self.smtp_receiver
+        msg['Cc'] = self.smtp_cc
+        msg['subject'] = self.smtp_subject
+
 
     def send_mial(self):
         try:

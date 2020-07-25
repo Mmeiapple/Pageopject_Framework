@@ -137,7 +137,7 @@ class BasePage(object):
                 self.driver.switch_to.window(window_handle)
                 break
 
-    def switch_window_by_tiele(self,url):
+    def switch_window_by_url(self,url):
         window_handles=self.driver.window_handles
         for window_handle in window_handles:
             if WebDriverWait(self.driver,getconfig.gettimeout).until(EC.title_contains(url)):
